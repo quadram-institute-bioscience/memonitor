@@ -89,7 +89,7 @@ proc getSystemMemMB*(): tuple[free, total: float] =
     try:
       # Linux: Read from /proc/meminfo
       let meminfoContent = readFile("/proc/meminfo")
-      var memTotal, memAvailable: float = 0.0
+      var memTotal, memAvailable, memFree, memBuffers, memCached: float = 0.0
       
       for line in meminfoContent.splitLines():
         if line.startsWith("MemTotal:"):
@@ -100,8 +100,25 @@ proc getSystemMemMB*(): tuple[free, total: float] =
           let parts = line.split()
           if parts.len >= 2:
             memAvailable = parseFloat(parts[1]) / 1024.0  # Convert KB to MB
+        elif line.startsWith("MemFree:"):
+          let parts = line.split()
+          if parts.len >= 2:
+            memFree = parseFloat(parts[1]) / 1024.0  # Convert KB to MB
+        elif line.startsWith("Buffers:"):
+          let parts = line.split()
+          if parts.len >= 2:
+            memBuffers = parseFloat(parts[1]) / 1024.0  # Convert KB to MB
+        elif line.startsWith("Cached:"):
+          let parts = line.split()
+          if parts.len >= 2:
+            memCached = parseFloat(parts[1]) / 1024.0  # Convert KB to MB
       
-      return (memAvailable, memTotal)
+      # If MemAvailable is not available, calculate it as Free + Buffers + Cached
+      if memAvailable == 0.0 and memFree > 0.0:
+        memAvailable = memFree + memBuffers + memCached
+      
+      if memTotal > 0.0 and memAvailable >= 0.0:
+        return (memAvailable, memTotal)
     except:
       discard
   

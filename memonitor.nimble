@@ -5,7 +5,7 @@ description   = "Cross-platform memory monitoring utilities for Nim programs"
 license       = "MIT"
 srcDir        = "."
 installExt    = @["nim"]
-skipDirs      = @["tests"]
+skipDirs      = @["tests", "docs"]
 
 # Dependencies
 requires "nim >= 1.6.0"
