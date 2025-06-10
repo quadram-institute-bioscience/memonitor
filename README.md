@@ -5,11 +5,8 @@ A cross-platform Nim library to monitor RAM usage in applications.
 ## Features
 
 - Monitor process memory usage
-- Get system memory information (free, total)
-- Calculate memory usage percentages
 - Format memory values with appropriate units (MB/GB)
 - Works on Linux, macOS, and Windows
-- Simple API with comprehensive memory information
 
 ## Installation
 
