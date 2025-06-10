@@ -1,0 +1,10 @@
+nimTitle	memonitor	memonitor.html	module memonitor		0
+nim	MemInfo	memonitor.html#MemInfo	object MemInfo		24
+nim	getProcessRamMB	memonitor.html#getProcessRamMB	proc getProcessRamMB(): float		31
+nim	getSystemMemMB	memonitor.html#getSystemMemMB	proc getSystemMemMB(): tuple[free, total: float]		83
+nim	getMemInfo	memonitor.html#getMemInfo	proc getMemInfo(): MemInfo		202
+nim	`$`	memonitor.html#$,MemInfo	proc `$`(info: MemInfo): string		220
+nim	formatMemMB	memonitor.html#formatMemMB,float	proc formatMemMB(memMB: float): string		243
+nim	isMemInfoAvailable	memonitor.html#isMemInfoAvailable	proc isMemInfoAvailable(): tuple[process, system: bool]		252
+nim	withMemoryMonitoring	memonitor.html#withMemoryMonitoring.t,untyped	template withMemoryMonitoring(body: untyped): untyped		257
+nim	getNimMemInfo	memonitor.html#getNimMemInfo	proc getNimMemInfo(): tuple[used, free: int]		275
