@@ -1,8 +1,7 @@
 # memonitor
 
 [![Test](https://github.com/telatin/memonitor/actions/workflows/test.yml/badge.svg)](https://github.com/telatin/memonitor/actions/workflows/test.yml)
-
-A cross-platform Nim library to monitor RAM usage in applications.
+[![Nimble Directory](https://img.shields.io/badge/Nimble_Directory-memonitor-blue)](https://nimble.directory/pkg/memonitor)
 
 ## Features
 
