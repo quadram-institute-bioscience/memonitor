@@ -1,0 +1,33 @@
+name: Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        nim: ['1.6.x', 'stable']
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Nim
+      uses: jiro4989/setup-nim-action@v2
+      with:
+        nim-version: ${{ matrix.nim }}
+
+    - name: Install dependencies
+      run: nimble install -y
+
+    - name: Run tests
+      run: nimble test
+
+    - name: Build library
+      run: nim c memonitor.nim
